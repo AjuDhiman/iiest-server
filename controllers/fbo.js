@@ -18,9 +18,9 @@ exports.fboPayment = async (req, res) => {
       "merchantTransactionId": tx_uuid,
       "merchantUserId": "MUID123",
       "amount": req.body.total_amount * 100,
-      "redirectUrl": "https://iiest-server.onrender.com/iiest/fbo-pay-return",
+      "redirectUrl": "https://iiest-server-6g2x.onrender.com/iiest/fbo-pay-return",
       "redirectMode": "POST",
-      "callbackUrl": "https://iiest-server.onrender.com/iiest/fbo-pay-return",
+      "callbackUrl": "https://iiest-server-6g2x.onrender.com/iiest/fbo-pay-return",
       "paymentInstrument": {
         "type": "PAY_PAGE"
       }
@@ -49,7 +49,7 @@ exports.fboPayment = async (req, res) => {
       }
     }).then(async function (response) {
       console.log('test--------',response.data.data.instrumentResponse.redirectInfo.url);
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200','http://localhost:3000/iiest/fbopayment','https://iiest-server.onrender.com/','https://iiest-web-parr.vercel.app/');
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200','http://localhost:3000/iiest/fbopayment','https://iiest-server-6g2x.onrender.com/','https://iiest-web-parr.vercel.app/', 'https://iiest-web.vercel.app/');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token');
       //res.redirect('https://google.com');
