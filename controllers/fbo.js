@@ -49,7 +49,7 @@ exports.fboPayment = async (req, res) => {
       }
     }).then(async function (response) {
       console.log('test--------',response.data.data.instrumentResponse.redirectInfo.url);
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200','http://localhost:3000/iiest/fbopayment','https://iiest-server-6g2x.onrender.com/','https://iiest-web-parr.vercel.app/', 'https://iiest-web.vercel.app/');
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token');
       //res.redirect('https://google.com');
@@ -67,7 +67,7 @@ exports.fboPayReturn = async (req, res) => {
 
     if (req.body.code == 'PAYMENT_SUCCESS' && req.body.merchantId && req.body.transactionId && req.body.providerReferenceId) {
       if (req.body.transactionId) {
-        res.redirect('https://iiest-web-parr.vercel.app/fbo');
+        res.redirect('https://iiest-web.vercel.app/fbo');
         // let saltKey = '875126e4-5a13-4dae-ad60-5b8c8b629035';
         // let saltIndex = 1
 
