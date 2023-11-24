@@ -53,7 +53,8 @@ exports.fboPayment = async (req, res) => {
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token');
       //res.redirect('https://google.com');
-      res.redirect(response.data.data.instrumentResponse.redirectInfo.url);
+      return res.status(200).json({message : response.data.data.instrumentResponse.redirectInfo.url})
+      //res.redirect(response.data.data.instrumentResponse.redirectInfo.url);
     }).catch(function (error) {
       console.log(error);
     });
@@ -68,27 +69,27 @@ exports.fboPayReturn = async (req, res) => {
     if (req.body.code == 'PAYMENT_SUCCESS' && req.body.merchantId && req.body.transactionId && req.body.providerReferenceId) {
       if (req.body.transactionId) {
         res.redirect('https://iiest-web.vercel.app/fbo');
-        // let saltKey = '875126e4-5a13-4dae-ad60-5b8c8b629035';
-        // let saltIndex = 1
+        let saltKey = '875126e4-5a13-4dae-ad60-5b8c8b629035';
+        let saltIndex = 1
 
-        // let surl = 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/PGTESTPAYUAT93/' + req.body.transactionId;
+        let surl = 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/PGTESTPAYUAT93/' + req.body.transactionId;
 
-        // let string = '/pg/v1/status/PGTESTPAYUAT93/' + req.body.transactionId + saltKey;
+        let string = '/pg/v1/status/PGTESTPAYUAT93/' + req.body.transactionId + saltKey;
 
-        // let sha256_val = sha256(string);
-        // let checksum = sha256_val + '###' + saltIndex;
+        let sha256_val = sha256(string);
+        let checksum = sha256_val + '###' + saltIndex;
 
-        // axios.get(surl, {
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'X-VERIFY': checksum,
-        //     'X-MERCHANT-ID': req.body.transactionId
-        //   }
-        // }).then(function (response) {
-        //   console.log(response);
-        // }).catch(function (error) {
-        //   console.log(error);
-        // });
+        axios.get(surl, {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-VERIFY': checksum,
+            'X-MERCHANT-ID': req.body.transactionId
+          }
+        }).then(function (response) {
+          console.log(response);
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
     }
   } catch (error) {
